@@ -91,9 +91,6 @@ Además de ilustración, trabaja en cerámica creando piezas figurativas con la 
     priceNumber: 32000,
     img: '/Pack Tres Origenes.webp',
     isNew: true,
-    acidity: 3,
-    intensity: 4,
-    bitterness: 3,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
     description: 'Viaja por el mundo a través del café con nuestro pack de tres orígenes. Incluye selecciones de Guatemala, Colombia y Brasil. Ideal para regalar o para descubrir tu perfil de sabor favorito.'
   },

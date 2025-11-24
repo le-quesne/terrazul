@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { products } from '../data/products'
-import { ArrowLeft, Star, Truck, ShieldCheck } from 'lucide-react'
+import { Truck, ShieldCheck } from 'lucide-react'
 
 export default function ProductDetail() {
   const { id } = useParams()
