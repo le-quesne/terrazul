@@ -17,7 +17,7 @@ export default function BaristaPopup() {
       // Check if user has already dismissed or completed the quiz in this session if needed
       // For now, just show it
       setIsOpen(true);
-    }, 15000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);

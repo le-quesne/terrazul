@@ -12,11 +12,16 @@ export default function ProductDetail() {
   const [viewMode, setViewMode] = useState<'product' | 'art'>('product')
 
   const product = products.find(p => p.id === id)
+  const [activeImg, setActiveImg] = useState<string>('')
+  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     // Scroll to top when product changes
     window.scrollTo(0, 0)
-  }, [id])
+    if (product) {
+      setActiveImg(product.img)
+    }
+  }, [id, product])
 
   if (!product) {
     return (
@@ -96,7 +101,7 @@ export default function ProductDetail() {
         )}
 
         {/* Left Column: Image */}
-        <div className="product-gallery" style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="product-gallery" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ 
             backgroundColor: 'transparent', 
             borderRadius: '12px', 
@@ -108,14 +113,16 @@ export default function ProductDetail() {
             maxWidth: viewMode === 'art' ? '800px' : '100%'
           }}>
             <img 
-              key={viewMode}
-              src={viewMode === 'product' ? product.img : (product.artInfo?.illustration || product.img)}  
+              key={viewMode === 'product' ? activeImg : 'art'}
+              src={viewMode === 'product' ? (activeImg || product.img) : (product.artInfo?.illustration || product.img)}  
               alt={product.name} 
               className="fade-in"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               style={{ 
                 width: '100%', 
                 maxWidth: viewMode === 'art' ? '550px' : '700px', 
-                height: 'auto', 
+                height: '500px', 
                 objectFit: 'contain', 
                 
                 // Transition
@@ -125,13 +132,50 @@ export default function ProductDetail() {
                 filter: viewMode === 'product' ? 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' : 'sepia(0.1) contrast(1.05)',
                 
                 // Hippie/Creative Mode
-                transform: viewMode === 'art' ? 'rotate(-3deg) scale(1.05)' : 'none',
+                transform: viewMode === 'art' 
+                  ? (isHovered ? 'rotate(-3deg) scale(1.1)' : 'rotate(-3deg) scale(1.05)')
+                  : (viewMode === 'product' && activeImg === product.tastingProfileImage 
+                      ? (isHovered ? 'scale(1.6)' : 'scale(1.4)') 
+                      : (isHovered ? 'scale(1.2)' : 'none')),
+                cursor: 'zoom-in',
                 border: viewMode === 'art' ? '15px solid #fff' : 'none',
                 boxShadow: viewMode === 'art' ? '5px 10px 20px rgba(0,0,0,0.15)' : 'none',
                 borderRadius: viewMode === 'art' ? '2px' : '0'
               }} 
             />
           </div>
+
+          {/* Thumbnails */}
+          {viewMode === 'product' && product.tastingProfileImage && (
+            <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
+                <button 
+                    onClick={() => setActiveImg(product.img)}
+                    style={{
+                        border: activeImg === product.img ? '2px solid var(--primary-blue)' : '2px solid transparent',
+                        borderRadius: '10px',
+                        padding: '3px',
+                        cursor: 'pointer',
+                        background: 'transparent',
+                        transition: 'all 0.2s ease'
+                    }}
+                >
+                    <img src={product.img} alt="Producto" style={{ width: '70px', height: '70px', objectFit: 'contain', borderRadius: '6px', background: 'white' }} />
+                </button>
+                <button 
+                    onClick={() => setActiveImg(product.tastingProfileImage!)}
+                    style={{
+                        border: activeImg === product.tastingProfileImage ? '2px solid var(--primary-blue)' : '2px solid transparent',
+                        borderRadius: '10px',
+                        padding: '3px',
+                        cursor: 'pointer',
+                        background: 'transparent',
+                        transition: 'all 0.2s ease'
+                    }}
+                >
+                    <img src={product.tastingProfileImage} alt="Perfil de taza" style={{ width: '70px', height: '70px', objectFit: 'contain', borderRadius: '6px', background: 'white' }} />
+                </button>
+            </div>
+          )}
         </div>
 
         {/* Right Column: Details */}

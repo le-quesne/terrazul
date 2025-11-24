@@ -67,7 +67,10 @@ export default function Shop() {
           <Link to={`/producto/${product.id}`} className="product-card" key={product.id} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="product-img-container">
               {product.isNew && <span className="badge-new">Oferta</span>}
-              <img src={product.img} alt={product.name} className="product-img" />
+              <img src={product.img} alt={product.name} className="product-img product-img-main" />
+              {product.tastingProfileImage && (
+                <img src={product.tastingProfileImage} alt={`${product.name} tasting profile`} className="product-img product-img-hover" />
+              )}
             </div>
             <h4 className="product-title">{product.name}</h4>
             <span className="product-price">{product.price}</span>

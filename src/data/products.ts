@@ -13,6 +13,7 @@ export interface Product {
   intensity?: number;
   bitterness?: number;
   grindOptions?: string[];
+  tastingProfileImage?: string;
   artInfo?: {
     title: string;
     description: string;
@@ -41,6 +42,7 @@ export const products: Product[] = [
     intensity: 3,
     bitterness: 2,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
+    tastingProfileImage: '/Kantutani-Cata.png',
     description: 'Un café excepcional cultivado en las alturas de Bolivia. Kantutani ofrece un perfil de taza equilibrado con notas dulces y un cuerpo sedoso. Perfecto para quienes buscan un café de especialidad con carácter pero accesible.',
     artInfo: {
       title: 'Arte de Kantutani',
@@ -107,6 +109,7 @@ Además de ilustración, trabaja en cerámica creando piezas figurativas con la 
     intensity: 3,
     bitterness: 2,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
+    tastingProfileImage: '/Huehuetenango-Cata.png',
     description: 'Proveniente de la famosa región de Huehuetenango, este café destaca por su acidez brillante y sus complejas notas frutales. Un favorito entre los conocedores.',
     artInfo: {
       title: 'Arte de Huehuetenango',
@@ -155,6 +158,7 @@ Buen Muchacho tiene comisiones abiertas y un portafolio amplio que incluye poste
     intensity: 4,
     bitterness: 3,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
+    tastingProfileImage: '/Huila-Cata.png',
     description: 'El clásico café colombiano elevado a su máxima expresión. Dulzura pronunciada, acidez media y un final limpio que invita a seguir bebiendo.',
     artInfo: {
       title: 'Arte de Huila',
@@ -199,6 +203,7 @@ Sandoval ha colaborado con proyectos de diseño conceptual, portadas de música 
     intensity: 3,
     bitterness: 4,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
+    tastingProfileImage: '/Minas Gerais-Cata.png',
     description: 'Cuerpo denso y baja acidez, típico de los mejores cafés brasileños. Ideal para espresso o para quienes prefieren sabores intensos y achocolatados.',
     artInfo: {
       title: 'Arte de Minas Gerais',
