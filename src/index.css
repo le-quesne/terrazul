@@ -1,0 +1,49 @@
+:root {
+  font-family: 'Questrial', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Variables based on the design */
+  --font-heading: 'DM Sans', sans-serif;
+  --font-body: 'Questrial', sans-serif;
+  
+  --primary-blue: #1119B4;
+  --text-white: #ffffff;
+  --text-black: #1a1a1a;
+  --text-heading: #0E1B4D;
+  --bg-light: #EFF0F5;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  color: var(--text-black);
+  font-family: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p, span, div, input, textarea, select {
+  font-family: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--text-heading);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
