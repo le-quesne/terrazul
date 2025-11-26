@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { Product } from '../data/products';
+import type { Product } from '../types/product';
 
 export interface CartItem extends Product {
     cartId: string; // Unique ID for the cart item (product ID + options)

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { products } from '../data/products'
+import { getProductById } from '../services/productService'
+import type { Product } from '../types/product'
 import { Truck, ShieldCheck } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import './product-detail.css'
@@ -14,9 +15,26 @@ export default function ProductDetail() {
   const [viewMode, setViewMode] = useState<'product' | 'art'>('product')
   const { addToCart } = useCart()
 
-  const product = products.find(p => p.id === id)
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
   const [activeImg, setActiveImg] = useState<string>('')
   const [isHovered, setIsHovered] = useState(false)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) return
+      setLoading(true)
+      try {
+        const data = await getProductById(id)
+        setProduct(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchProduct()
+  }, [id])
 
   useEffect(() => {
     // Scroll to top when product changes
@@ -25,6 +43,10 @@ export default function ProductDetail() {
       setActiveImg(product.img)
     }
   }, [id, product])
+
+  if (loading) {
+    return <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>Cargando...</div>
+  }
 
   if (!product) {
     return (
@@ -51,7 +73,6 @@ export default function ProductDetail() {
     const productToAdd = {
       ...product!,
       priceNumber: currentPrice,
-      price: formatPrice(currentPrice)
     };
     addToCart(productToAdd, quantity, selectedWeight, selectedGrind);
   };

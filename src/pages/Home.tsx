@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { products } from '../data/products'
+import { useProducts } from '../hooks/useProducts'
 import BaristaPopup from '../components/BaristaPopup'
 
 export default function Home() {
+  const { products, loading } = useProducts()
   const [quantity, setQuantity] = useState(1)
+
+  if (loading) {
+    return <div className="container" style={{ padding: '100px 0', textAlign: 'center' }}>Cargando...</div>
+  }
 
   return (
     <>
@@ -22,10 +27,10 @@ export default function Home() {
           </div>
           <div className="hero-graphic">
             {/* Hero Graphic Image */}
-            <img 
-              src="/logogeometrico.png" 
-              alt="Terrazul Geometric Star" 
-              style={{ width: '500px', height: 'auto', objectFit: 'contain' }} 
+            <img
+              src="/logogeometrico.png"
+              alt="Terrazul Geometric Star"
+              style={{ width: '500px', height: 'auto', objectFit: 'contain' }}
             />
           </div>
         </div>
@@ -43,8 +48,8 @@ export default function Home() {
               <span className="tag">Lo último</span>
               <h2 style={{ color: 'var(--text-white)' }}>Kantutani, Bolivia</h2>
               <span className="price">$14.000</span>
-              <p style={{fontSize: '12px', marginBottom: '20px'}}>Los gastos de envío se calculan en la pantalla de pago.</p>
-              
+              <p style={{ fontSize: '12px', marginBottom: '20px' }}>Los gastos de envío se calculan en la pantalla de pago.</p>
+
               <div className="options">
                 <div className="option-group">
                   <span className="option-label">Peso</span>
@@ -53,17 +58,17 @@ export default function Home() {
                     <button className="option-btn">1kg</button>
                   </div>
                 </div>
-                
+
                 <div className="option-group">
                   <span className="option-label">Tipo de molienda</span>
-                  <div className="option-buttons" style={{flexWrap: 'wrap'}}>
+                  <div className="option-buttons" style={{ flexWrap: 'wrap' }}>
                     <button className="option-btn active">Grano entero (recomendado)</button>
                     <button className="option-btn">Molido fino</button>
                     <button className="option-btn">Molido grueso</button>
                     <button className="option-btn">Molido medio</button>
                   </div>
                 </div>
-                
+
                 <div className="option-group">
                   <span className="option-label">Cantidad</span>
                   <div className="quantity-selector">
@@ -73,13 +78,13 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="action-buttons">
                 <button className="btn btn-outline btn-full">Agregar al carrito</button>
-                <button className="btn btn-primary btn-full" style={{backgroundColor: '#6495ED'}}>Comprar ahora</button>
+                <button className="btn btn-primary btn-full" style={{ backgroundColor: '#6495ED' }}>Comprar ahora</button>
               </div>
-              
-              <Link to="/producto/kantutani-bolivia" style={{display: 'block', marginTop: '15px', fontSize: '12px', textAlign: 'center'}}>Ver todos los detalles →</Link>
+
+              <Link to="/producto/kantutani-bolivia" style={{ display: 'block', marginTop: '15px', fontSize: '12px', textAlign: 'center' }}>Ver todos los detalles →</Link>
             </div>
           </div>
         </div>
@@ -97,7 +102,9 @@ export default function Home() {
                   <img src={product.img} alt={product.name} className="product-img" />
                 </div>
                 <h4 className="product-title">{product.name}</h4>
-                <span className="product-price">{product.price}</span>
+                <span className="product-price">
+                  {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.priceNumber)}
+                </span>
                 <button className="btn-small">Comprar</button>
               </Link>
             ))}
@@ -110,14 +117,14 @@ export default function Home() {
         <div className="container">
           <div className="about-card">
             <div className="about-image">
-              <img src="/Trabajemos juntos.webp" alt="Barista" style={{objectFit: 'cover', height: '100%', width: '100%'}} />
+              <img src="/Trabajemos juntos.webp" alt="Barista" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
             </div>
             <div className="about-content">
               <h3 className="about-title">Trabajemos juntos por entregar café al mundo</h3>
               <p className="about-text">
                 Conéctate con nosotros y descubre las ventajas exclusivas para mayoristas. ¡Haz que tu negocio brille con Terrazul! Estamos listos para ayudar a sobresalir.
               </p>
-              <button className="btn-small" style={{width: 'fit-content'}}>Contáctanos</button>
+              <button className="btn-small" style={{ width: 'fit-content' }}>Contáctanos</button>
             </div>
           </div>
         </div>

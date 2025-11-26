@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { X, Coffee, ArrowRight } from 'lucide-react';
-import { products } from '../data/products';
+import { useProducts } from '../hooks/useProducts';
 
 export default function BaristaPopup() {
+  const { products } = useProducts();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<'prompt' | 'quiz' | 'result'>('prompt');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -201,7 +202,7 @@ export default function BaristaPopup() {
         boxShadow: '0 20px 50px rgba(0,0,0,0.2)',
         animation: 'fadeIn 0.5s ease-out'
       }}>
-        <button 
+        <button
           onClick={handleClose}
           style={{
             position: 'absolute',
@@ -218,13 +219,13 @@ export default function BaristaPopup() {
 
         {step === 'prompt' && (
           <div style={{ textAlign: 'center' }}>
-            <div style={{ 
-              width: '80px', 
-              height: '80px', 
-              background: 'var(--primary-blue)', 
-              borderRadius: '50%', 
-              display: 'flex', 
-              justifyContent: 'center', 
+            <div style={{
+              width: '80px',
+              height: '80px',
+              background: 'var(--primary-blue)',
+              borderRadius: '50%',
+              display: 'flex',
+              justifyContent: 'center',
               alignItems: 'center',
               margin: '0 auto 20px auto',
               color: 'white'
@@ -238,7 +239,7 @@ export default function BaristaPopup() {
               Soy tu Barista Virtual. Responde unas breves preguntas y te recomendaré el café perfecto para tu paladar.
             </p>
             <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
-              <button 
+              <button
                 onClick={handleClose}
                 style={{
                   padding: '12px 25px',
@@ -252,7 +253,7 @@ export default function BaristaPopup() {
               >
                 No, gracias
               </button>
-              <button 
+              <button
                 onClick={handleStart}
                 style={{
                   padding: '12px 25px',
@@ -281,16 +282,16 @@ export default function BaristaPopup() {
               </span>
               <div style={{ display: 'flex', gap: '5px' }}>
                 {questions.map((_, idx) => (
-                  <div key={idx} style={{ 
-                    width: '8px', 
-                    height: '8px', 
-                    borderRadius: '50%', 
-                    background: idx === currentQuestion ? 'var(--primary-blue)' : '#eee' 
+                  <div key={idx} style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: idx === currentQuestion ? 'var(--primary-blue)' : '#eee'
                   }}></div>
                 ))}
               </div>
             </div>
-            
+
             <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', marginBottom: '30px', color: 'var(--text-heading)' }}>
               {questions[currentQuestion].text}
             </h3>
@@ -335,22 +336,22 @@ export default function BaristaPopup() {
         {step === 'result' && product && (
           <div style={{ textAlign: 'center' }}>
             <div style={{ marginBottom: '20px' }}>
-              <span style={{ 
-                background: '#e8eaf6', 
-                color: 'var(--primary-blue)', 
-                padding: '5px 15px', 
-                borderRadius: '20px', 
-                fontSize: '0.9rem', 
-                fontWeight: 600 
+              <span style={{
+                background: '#e8eaf6',
+                color: 'var(--primary-blue)',
+                padding: '5px 15px',
+                borderRadius: '20px',
+                fontSize: '0.9rem',
+                fontWeight: 600
               }}>
                 Tu Match Perfecto
               </span>
             </div>
-            
+
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', marginBottom: '10px', color: 'var(--text-heading)' }}>
               {product.name}
             </h2>
-            
+
             <div style={{ margin: '20px auto', width: '200px', height: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <img src={product.img} alt={product.name} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }} />
             </div>
@@ -372,7 +373,7 @@ export default function BaristaPopup() {
               <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--primary-blue)' }}>{recommendedGrind}</span>
             </div>
 
-            <button 
+            <button
               onClick={() => {
                 setIsOpen(false);
                 navigate(`/producto/${product.id}`);
