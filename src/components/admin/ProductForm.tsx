@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import type { Product } from '../../types/product';
 import { createProduct, updateProduct, uploadProductImage } from '../../services/productService';
 import { ArrowLeft, Save, Upload } from 'lucide-react';
+import { TagInput } from '../ui/TagInput';
 
 interface ProductFormProps {
     initialData?: Product;
@@ -21,7 +22,7 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
         region: '',
         roastLevel: '',
         img: '',
-        tastingNotes: [],
+        tastingNotes: initialData?.tastingNotes || [],
         grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
         prices: { '250g': 0, '1kg': 0 },
         ...initialData
@@ -40,9 +41,6 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
 
     const [artFile, setArtFile] = useState<File | null>(null);
     const [artPreview, setArtPreview] = useState<string>(initialData?.artInfo?.illustration || '');
-
-    // Helper for array inputs (tasting notes)
-    const [tastingNotesInput, setTastingNotesInput] = useState(initialData?.tastingNotes?.join(', ') || '');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -115,7 +113,6 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
                     ...formData.artInfo,
                     illustration: artIllustrationUrl
                 } : undefined,
-                tastingNotes: tastingNotesInput.split(',').map(note => note.trim()).filter(Boolean),
                 prices: {
                     '250g': price250g,
                     '1kg': price1kg
@@ -231,12 +228,11 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
                     </div>
 
                     <div style={{ marginTop: '20px' }}>
-                        <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Notas de Cata (separadas por coma)</label>
-                        <input
-                            value={tastingNotesInput}
-                            onChange={(e) => setTastingNotesInput(e.target.value)}
-                            placeholder="Ej: Chocolate, Nuez, Frutos rojos"
-                            style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid #ddd' }}
+                        <TagInput
+                            label="Notas de Cata (Presiona Enter para agregar)"
+                            value={formData.tastingNotes || []}
+                            onChange={(tags) => setFormData(prev => ({ ...prev, tastingNotes: tags }))}
+                            placeholder="Ej: Chocolate, Nuez"
                         />
                     </div>
 

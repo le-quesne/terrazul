@@ -98,26 +98,29 @@ export default function ProductDetail() {
           right: '20px',
           zIndex: 100,
           display: 'flex',
-          background: viewMode === 'art' ? 'rgba(255,255,255,0.1)' : 'var(--bg-light)',
-          backdropFilter: viewMode === 'art' ? 'blur(10px)' : 'none',
-          borderRadius: '30px',
-          padding: '4px',
+          background: 'rgba(255, 255, 255, 0.3)', // More transparent
+          backdropFilter: 'blur(20px) saturate(180%)', // Apple-like blur & saturation
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          borderRadius: '100px', // Pill shape
+          padding: '5px',
           width: 'fit-content',
-          transition: 'all 0.5s ease',
-          border: viewMode === 'art' ? '1px solid rgba(255,255,255,0.2)' : '1px solid #ddd'
+          transition: 'all 0.3s ease',
+          border: '1px solid rgba(255, 255, 255, 0.4)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
         }}>
           <button
             onClick={() => setViewMode('product')}
             style={{
-              padding: '8px 20px',
-              borderRadius: '25px',
+              padding: '8px 24px',
+              borderRadius: '100px',
               border: 'none',
-              background: viewMode === 'product' ? 'var(--primary-blue)' : 'transparent',
-              color: viewMode === 'product' ? 'white' : (viewMode === 'art' ? '#fff' : 'var(--text-heading)'),
-              fontWeight: 500,
+              background: viewMode === 'product' ? '#FFFFFF' : 'transparent',
+              color: viewMode === 'product' ? '#000000' : 'rgba(0,0,0,0.6)',
+              fontWeight: 600,
+              fontSize: '14px',
               cursor: 'pointer',
-              boxShadow: viewMode === 'product' ? '0 2px 5px rgba(0,0,0,0.2)' : 'none',
-              transition: 'all 0.3s ease'
+              boxShadow: viewMode === 'product' ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+              transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
             }}
           >
             Producto
@@ -125,15 +128,16 @@ export default function ProductDetail() {
           <button
             onClick={() => setViewMode('art')}
             style={{
-              padding: '8px 20px',
-              borderRadius: '25px',
+              padding: '8px 24px',
+              borderRadius: '100px',
               border: 'none',
-              background: viewMode === 'art' ? 'rgba(255,255,255,0.2)' : 'transparent',
-              color: viewMode === 'art' ? 'white' : 'var(--text-heading)',
-              fontWeight: 500,
+              background: viewMode === 'art' ? '#FFFFFF' : 'transparent',
+              color: viewMode === 'art' ? '#000000' : 'rgba(0,0,0,0.6)',
+              fontWeight: 600,
+              fontSize: '14px',
               cursor: 'pointer',
-              boxShadow: viewMode === 'art' ? '0 2px 5px rgba(0,0,0,0.1)' : 'none',
-              transition: 'all 0.3s ease'
+              boxShadow: viewMode === 'art' ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
+              transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)'
             }}
           >
             Arte

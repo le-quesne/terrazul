@@ -1,5 +1,9 @@
 import { supabase } from '../lib/supabase';
 import type { Product } from '../types/product';
+import type { Database } from '../types/supabase';
+
+type ProductRow = Database['public']['Tables']['products']['Row'];
+type ProductUpdate = Database['public']['Tables']['products']['Update'];
 
 export const getProducts = async (): Promise<Product[]> => {
     const { data, error } = await supabase
@@ -10,7 +14,7 @@ export const getProducts = async (): Promise<Product[]> => {
         throw error;
     }
 
-    return data.map((item: any) => mapDatabaseToProduct(item));
+    return data.map((item) => mapDatabaseToProduct(item));
 };
 
 export const getProductById = async (id: string): Promise<Product | null> => {
@@ -38,7 +42,8 @@ export const createProduct = async (product: Omit<Product, 'id'> & { id?: string
 
     const { data, error } = await supabase
         .from('products')
-        .insert(dbProduct)
+        // @ts-ignore
+        .insert(dbProduct as any)
         .select()
         .single();
 
@@ -54,7 +59,8 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 
     const { data, error } = await supabase
         .from('products')
-        .update(dbProduct)
+        // @ts-ignore
+        .update(dbProduct as any)
         .eq('id', id)
         .select()
         .single();
@@ -78,27 +84,27 @@ export const deleteProduct = async (id: string): Promise<void> => {
 };
 
 // Helpers
-const mapDatabaseToProduct = (item: any): Product => ({
+const mapDatabaseToProduct = (item: ProductRow): Product => ({
     id: item.id,
     name: item.name,
     priceNumber: item.price_number,
-    prices: item.prices,
+    prices: item.prices as unknown as { [key: string]: number },
     img: item.img,
-    isNew: item.is_new,
+    isNew: item.is_new ?? undefined,
     description: item.description,
-    region: item.region,
-    roastLevel: item.roast_level,
-    tastingNotes: item.tasting_notes,
-    acidity: item.acidity,
-    intensity: item.intensity,
-    bitterness: item.bitterness,
-    grindOptions: item.grind_options,
-    tastingProfileImage: item.tasting_profile_image,
-    artInfo: item.art_info,
+    region: item.region ?? undefined,
+    roastLevel: item.roast_level ?? undefined,
+    tastingNotes: item.tasting_notes ?? undefined,
+    acidity: item.acidity ?? undefined,
+    intensity: item.intensity ?? undefined,
+    bitterness: item.bitterness ?? undefined,
+    grindOptions: item.grind_options ?? undefined,
+    tastingProfileImage: item.tasting_profile_image ?? undefined,
+    artInfo: item.art_info as unknown as Product['artInfo'],
 });
 
-const mapProductToDatabase = (product: any) => {
-    const dbProduct: any = {};
+const mapProductToDatabase = (product: Partial<Product>): ProductUpdate => {
+    const dbProduct: ProductUpdate = {};
     if (product.id !== undefined) dbProduct.id = product.id;
     if (product.name !== undefined) dbProduct.name = product.name;
     if (product.priceNumber !== undefined) dbProduct.price_number = product.priceNumber;
@@ -119,8 +125,9 @@ const mapProductToDatabase = (product: any) => {
 };
 
 export const uploadProductImage = async (file: File): Promise<string> => {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+    // Secure file naming: Timestamp + sanitized original name
+    const sanitizedName = file.name.replace(/[^a-zA-Z0-9.]/g, '_');
+    const fileName = `${Date.now()}-${sanitizedName}`;
     const filePath = `${fileName}`;
 
     const { error: uploadError } = await supabase.storage
