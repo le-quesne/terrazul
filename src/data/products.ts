@@ -1,8 +1,11 @@
 export interface Product {
   id: string;
   name: string;
-  price: string;
-  priceNumber: number; // For calculations if needed
+  price: string; // Display price for default weight
+  priceNumber: number; // Numeric price for default weight
+  prices: {
+    [key: string]: number;
+  };
   img: string;
   isNew?: boolean;
   description: string;
@@ -33,6 +36,10 @@ export const products: Product[] = [
     name: 'Kantutani, Bolivia',
     price: '$14.000',
     priceNumber: 14000,
+    prices: {
+      '250g': 14000,
+      '1kg': 48000
+    },
     img: '/Kantutani.webp',
     isNew: true,
     region: 'Bolivia',
@@ -91,6 +98,10 @@ Además de ilustración, trabaja en cerámica creando piezas figurativas con la 
     name: 'Pack Tres Orígenes',
     price: '$32.000',
     priceNumber: 32000,
+    prices: {
+      '250g': 32000,
+      '1kg': 110000
+    },
     img: '/Pack Tres Origenes.webp',
     isNew: true,
     grindOptions: ['Grano entero', 'Molido fino', 'Molido medio', 'Molido grueso'],
@@ -101,6 +112,10 @@ Además de ilustración, trabaja en cerámica creando piezas figurativas con la 
     name: 'Huehuetenango, Guatemala',
     price: '$36.500',
     priceNumber: 36500,
+    prices: {
+      '250g': 36500,
+      '1kg': 125000
+    },
     img: '/Huehuetenango.webp',
     region: 'Guatemala',
     roastLevel: 'Medio-Alto',
@@ -150,6 +165,10 @@ Buen Muchacho tiene comisiones abiertas y un portafolio amplio que incluye poste
     name: 'Huila, Colombia',
     price: '$40.000',
     priceNumber: 40000,
+    prices: {
+      '250g': 40000,
+      '1kg': 135000
+    },
     img: '/Huila.webp',
     region: 'Colombia',
     roastLevel: 'Medio',
@@ -195,6 +214,10 @@ Sandoval ha colaborado con proyectos de diseño conceptual, portadas de música 
     name: 'Minas Gerais, Brasil',
     price: '$34.000',
     priceNumber: 34000,
+    prices: {
+      '250g': 34000,
+      '1kg': 115000
+    },
     img: '/Minas Gerais.webp',
     region: 'Brasil',
     roastLevel: 'Medio-Oscuro',
