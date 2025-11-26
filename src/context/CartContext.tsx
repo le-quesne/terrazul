@@ -77,9 +77,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const cartTotal = cart.reduce((total, item) => {
-        // Assuming price is a string like "$14.000", we need to use priceNumber if available or parse the string
-        const price = item.priceNumber || parseInt(item.price.replace(/[^0-9]/g, '')) || 0;
-        return total + (price * item.quantity);
+        // Use priceNumber which should be updated when adding to cart
+        return total + (item.priceNumber * item.quantity);
     }, 0);
 
     const cartCount = cart.reduce((count, item) => count + item.quantity, 0);

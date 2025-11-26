@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { products } from '../data/products'
 import { Truck, ShieldCheck } from 'lucide-react'
 import { useCart } from '../context/CartContext'
-import './ProductDetail.css'
+import './product-detail.css'
 
 export default function ProductDetail() {
   const { id } = useParams()
@@ -57,7 +57,7 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className={viewMode === 'art' ? 'museum-mode-wrapper' : 'container'} style={{ padding: viewMode === 'art' ? '0' : '40px 20px', transition: 'all 0.5s ease' }}>
+    <div className={viewMode === 'art' ? 'museum-mode-wrapper' : 'container'} style={{ position: 'relative', padding: viewMode === 'art' ? '0' : '40px 20px', transition: 'all 0.5s ease' }}>
       {/* Breadcrumb - Hide in Art Mode for immersion */}
       {viewMode === 'product' && (
         <div style={{ marginBottom: '30px', fontSize: '14px', color: '#666' }}>
@@ -73,16 +73,17 @@ export default function ProductDetail() {
       {product.artInfo && (
         <div style={{
           position: 'absolute',
-          top: viewMode === 'art' ? '20px' : '0',
-          right: viewMode === 'art' ? '20px' : '0',
+          top: '20px',
+          right: '20px',
           zIndex: 100,
           display: 'flex',
-          background: viewMode === 'art' ? 'rgba(255,255,255,0.1)' : '#f0f0f0',
+          background: viewMode === 'art' ? 'rgba(255,255,255,0.1)' : 'var(--bg-light)',
           backdropFilter: viewMode === 'art' ? 'blur(10px)' : 'none',
           borderRadius: '30px',
           padding: '4px',
           width: 'fit-content',
-          transition: 'all 0.5s ease'
+          transition: 'all 0.5s ease',
+          border: viewMode === 'art' ? '1px solid rgba(255,255,255,0.2)' : '1px solid #ddd'
         }}>
           <button
             onClick={() => setViewMode('product')}
@@ -90,11 +91,11 @@ export default function ProductDetail() {
               padding: '8px 20px',
               borderRadius: '25px',
               border: 'none',
-              background: viewMode === 'product' ? 'white' : 'transparent',
-              color: viewMode === 'product' ? 'black' : (viewMode === 'art' ? '#fff' : '#666'),
+              background: viewMode === 'product' ? 'var(--primary-blue)' : 'transparent',
+              color: viewMode === 'product' ? 'white' : (viewMode === 'art' ? '#fff' : 'var(--text-heading)'),
               fontWeight: 500,
               cursor: 'pointer',
-              boxShadow: viewMode === 'product' ? '0 2px 5px rgba(0,0,0,0.1)' : 'none',
+              boxShadow: viewMode === 'product' ? '0 2px 5px rgba(0,0,0,0.2)' : 'none',
               transition: 'all 0.3s ease'
             }}
           >
@@ -107,7 +108,7 @@ export default function ProductDetail() {
               borderRadius: '25px',
               border: 'none',
               background: viewMode === 'art' ? 'rgba(255,255,255,0.2)' : 'transparent',
-              color: viewMode === 'art' ? 'white' : '#666',
+              color: viewMode === 'art' ? 'white' : 'var(--text-heading)',
               fontWeight: 500,
               cursor: 'pointer',
               boxShadow: viewMode === 'art' ? '0 2px 5px rgba(0,0,0,0.1)' : 'none',
