@@ -176,3 +176,58 @@
     background: var(--text-black);
     color: white;
 }
+
+/* Product Detail Layout */
+.product-detail-layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.product-main-image {
+    height: 500px;
+    /* Default desktop height */
+}
+
+@media (max-width: 768px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .product-gallery {
+        margin-bottom: 20px;
+    }
+
+    .product-main-image {
+        height: 300px !important;
+        /* Mobile height */
+    }
+
+    .product-info h1 {
+        font-size: 2rem !important;
+    }
+
+    .options-container {
+        padding: 15px 0;
+    }
+
+    .option-buttons {
+        flex-wrap: wrap;
+    }
+
+    /* Museum Mode Mobile */
+    .museum-frame {
+        max-width: 100%;
+    }
+
+    .museum-placard {
+        padding: 20px;
+    }
+
+    .museum-title {
+        font-size: 2rem;
+    }
+}

@@ -146,13 +146,7 @@ export default function ProductDetail() {
       )}
 
       {viewMode === 'product' ? (
-        <div className="product-detail-layout" style={{
-          position: 'relative',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '60px',
-          alignItems: 'start'
-        }}>
+        <div className="product-detail-layout">
 
           {/* Left Column: Image */}
           <div className="product-gallery" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -168,13 +162,12 @@ export default function ProductDetail() {
               <img
                 src={activeImg || product.img}
                 alt={product.name}
-                className="fade-in"
+                className="fade-in product-main-image"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 style={{
                   width: '100%',
                   maxWidth: '700px',
-                  height: '500px',
                   objectFit: 'contain',
                   transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',

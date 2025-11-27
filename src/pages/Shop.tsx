@@ -58,10 +58,10 @@ export default function Shop() {
       <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', marginBottom: '40px', color: 'var(--text-heading)' }}>Productos</h1>
 
       {/* Filters and Sorting Bar */}
-      <div className="shop-controls" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
+      <div className="shop-controls">
 
         {/* Left side: Filters */}
-        <div className="filters-group" style={{ display: 'flex', gap: '20px' }}>
+        <div className="filters-group">
           <span style={{ alignSelf: 'center', fontWeight: 500 }}>Filtrar:</span>
 
           {/* Roast Level Dropdown */}
@@ -70,7 +70,7 @@ export default function Shop() {
               <summary style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 12px', border: '1px solid #ddd', borderRadius: '4px', listStyle: 'none' }}>
                 Nivel de Tostado <ChevronDown size={16} />
               </summary>
-              <div className="dropdown-content" style={{ position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ddd', padding: '15px', zIndex: 10, width: '200px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', borderRadius: '8px', marginTop: '5px' }}>
+              <div className="dropdown-content dropdown-roast">
                 {roastLevels.length > 0 ? roastLevels.map(roast => (
                   <label key={roast} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', marginBottom: '8px' }}>
                     <input
@@ -91,7 +91,7 @@ export default function Shop() {
               <summary style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', padding: '8px 12px', border: '1px solid #ddd', borderRadius: '4px', listStyle: 'none' }}>
                 Precio <ChevronDown size={16} />
               </summary>
-              <div className="dropdown-content" style={{ position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ddd', padding: '15px', zIndex: 10, width: '250px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', borderRadius: '8px', marginTop: '5px' }}>
+              <div className="dropdown-content dropdown-price">
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <span>$</span>
                   <input

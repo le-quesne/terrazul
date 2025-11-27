@@ -1,15 +1,29 @@
 import { Link } from 'react-router-dom';
-import { Search, User, ShoppingBag } from 'lucide-react';
+import { Search, ShoppingBag, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useMagic } from '../context/MagicContext';
 
 export default function Header() {
     const { toggleCart, cartCount } = useCart();
+    const { isMagicMode, toggleMagicMode } = useMagic();
 
     return (
         <header className="header">
             <div className="container nav">
                 <div className="nav-icons-left">
                     <button className="btn-icon"><Search size={20} /></button>
+                    <button
+                        className="btn-icon magic-btn"
+                        onClick={toggleMagicMode}
+                        title="Modo Magia ✨"
+                        style={{
+                            color: isMagicMode ? '#bd00ff' : 'inherit',
+                            transition: 'all 0.3s ease',
+                            animation: isMagicMode ? 'pulse 2s infinite' : 'none'
+                        }}
+                    >
+                        <Sparkles size={20} />
+                    </button>
                 </div>
 
                 <div className="logo">
@@ -19,7 +33,7 @@ export default function Header() {
                 </div>
 
                 <div className="nav-icons">
-                    <a href="#account"><User size={20} /></a>
+
                     <button
                         className="btn-icon"
                         onClick={toggleCart}
