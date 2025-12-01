@@ -359,7 +359,7 @@ export default function ProductDetail() {
               <span className="museum-artist">por {product.artInfo?.artistName}</span>
 
               <div className="museum-description">
-                {product.artInfo?.description.split('\n\n').map((paragraph, i) => (
+                {(product.artInfo?.description || '').split('\n\n').map((paragraph, i) => (
                   <p key={i} style={{ marginBottom: '15px' }}>{paragraph}</p>
                 ))}
               </div>
@@ -367,7 +367,7 @@ export default function ProductDetail() {
               <div className="museum-curator-note">
                 <span className="museum-curator-title">Sobre el Artista</span>
                 <p className="museum-curator-text">
-                  {product.artInfo?.artistDescription.split('\n\n')[0]}...
+                  {(product.artInfo?.artistDescription || '').split('\n\n')[0]}...
                 </p>
               </div>
 

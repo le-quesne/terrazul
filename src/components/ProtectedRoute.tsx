@@ -6,6 +6,7 @@ export default function ProtectedRoute({ children }: { children?: ReactNode }) {
     const { session } = useAuth();
 
     if (!session) {
+        console.log('ProtectedRoute: Redirecting to login', { path: window.location.pathname });
         return <Navigate to="/admin/login" replace />;
     }
 

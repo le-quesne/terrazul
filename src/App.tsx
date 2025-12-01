@@ -37,7 +37,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/tienda" element={<Shop />} />
           <Route path="/producto/:id" element={<ProductDetail />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/admin/login" element={<Login />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={

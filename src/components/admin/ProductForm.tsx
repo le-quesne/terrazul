@@ -11,6 +11,7 @@ interface ProductFormProps {
 }
 
 export default function ProductForm({ initialData, isEdit = false }: ProductFormProps) {
+    console.log('ProductForm: Rendering with initialData:', initialData);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -29,8 +30,14 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
     });
 
     // Separate states for prices to handle them explicitly
-    const [price250g, setPrice250g] = useState<number>(initialData?.prices?.['250g'] || initialData?.priceNumber || 0);
-    const [price1kg, setPrice1kg] = useState<number>(initialData?.prices?.['1kg'] || (initialData?.priceNumber ? initialData.priceNumber * 3 : 0));
+    const [price250g, setPrice250g] = useState<number>(() => {
+        if (!initialData) return 0;
+        return initialData.prices?.['250g'] ?? initialData.priceNumber ?? 0;
+    });
+    const [price1kg, setPrice1kg] = useState<number>(() => {
+        if (!initialData) return 0;
+        return initialData.prices?.['1kg'] ?? (initialData.priceNumber ? initialData.priceNumber * 3 : 0);
+    });
 
     // Image States
     const [mainImageFile, setMainImageFile] = useState<File | null>(null);
@@ -57,13 +64,13 @@ export default function ProductForm({ initialData, isEdit = false }: ProductForm
         setFormData(prev => ({
             ...prev,
             artInfo: {
-                ...prev.artInfo,
+                ...(prev.artInfo || {}),
                 [name]: value,
                 // Ensure required fields exist to avoid TS errors if artInfo was undefined
-                title: prev.artInfo?.title || '',
-                description: prev.artInfo?.description || '',
-                artistName: prev.artInfo?.artistName || '',
-                artistDescription: prev.artInfo?.artistDescription || '',
+                title: prev.artInfo?.title || (name === 'title' ? value : ''),
+                description: prev.artInfo?.description || (name === 'description' ? value : ''),
+                artistName: prev.artInfo?.artistName || (name === 'artistName' ? value : ''),
+                artistDescription: prev.artInfo?.artistDescription || (name === 'artistDescription' ? value : ''),
             } as any
         }));
     };
