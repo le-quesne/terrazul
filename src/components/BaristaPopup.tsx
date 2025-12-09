@@ -26,12 +26,12 @@ export default function BaristaPopup() {
   const questions = [
     {
       id: 1,
-      text: "¿Qué tipo de sabores prefieres en tu café?",
+      text: "¿Cuál es tu preferencia de sabor base?",
       options: [
-        { label: "Frutales / brillantes", value: "fruity" },
-        { label: "Achocolatados / dulces", value: "chocolate" },
-        { label: "Nueces / caramelo", value: "nutty" },
-        { label: "Especiados / complejos", value: "spicy" }
+        { label: "Más ácido (Frutal / Brillante)", value: "fruity" },
+        { label: "Más dulce (Chocolate / Caramelo)", value: "chocolate" },
+        { label: "Más equilibrado (Nueces / Suave)", value: "nutty" },
+        { label: "Más intenso (Especiado / Fuerte)", value: "spicy" }
       ]
     },
     {

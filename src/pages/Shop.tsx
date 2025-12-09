@@ -199,6 +199,25 @@ export default function Shop() {
                   )}
                 </div>
                 <h4 className="product-title">{product.name}</h4>
+
+                {/* Tasting Notes in Cata Mode */}
+                {isTastingMode && product.tastingNotes && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '8px' }}>
+                    {product.tastingNotes.slice(0, 3).map((note, i) => (
+                      <span key={i} style={{
+                        fontSize: '11px',
+                        backgroundColor: '#f0f4ff',
+                        color: 'var(--primary-blue)',
+                        padding: '3px 8px',
+                        borderRadius: '10px',
+                        fontWeight: 500
+                      }}>
+                        {note}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
                 <span className="product-price">
                   {new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(product.priceNumber)}
                 </span>

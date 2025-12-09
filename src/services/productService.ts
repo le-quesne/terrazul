@@ -84,24 +84,37 @@ export const deleteProduct = async (id: string): Promise<void> => {
 };
 
 // Helpers
-const mapDatabaseToProduct = (item: ProductRow): Product => ({
-    id: item.id,
-    name: item.name,
-    priceNumber: item.price_number,
-    prices: item.prices as unknown as { [key: string]: number },
-    img: item.img,
-    isNew: item.is_new ?? undefined,
-    description: item.description,
-    region: item.region ?? undefined,
-    roastLevel: item.roast_level ?? undefined,
-    tastingNotes: item.tasting_notes ?? undefined,
-    acidity: item.acidity ?? undefined,
-    intensity: item.intensity ?? undefined,
-    bitterness: item.bitterness ?? undefined,
-    grindOptions: item.grind_options ?? undefined,
-    tastingProfileImage: item.tasting_profile_image ?? undefined,
-    artInfo: item.art_info as unknown as Product['artInfo'],
-});
+const mapDatabaseToProduct = (item: ProductRow): Product => {
+    // Helper to fix paths with spaces (specifically for Minas Gerais)
+    const fixPath = (path: string) => {
+        if (!path) return path;
+        return path.replace('Minas Gerais', 'Minas-Gerais');
+    };
+
+    const artInfo = item.art_info as unknown as Product['artInfo'];
+    if (artInfo && artInfo.illustration) {
+        artInfo.illustration = fixPath(artInfo.illustration);
+    }
+
+    return {
+        id: item.id,
+        name: item.name,
+        priceNumber: item.price_number,
+        prices: item.prices as unknown as { [key: string]: number },
+        img: fixPath(item.img),
+        isNew: item.is_new ?? undefined,
+        description: item.description,
+        region: item.region ?? undefined,
+        roastLevel: item.roast_level ?? undefined,
+        tastingNotes: item.tasting_notes ?? undefined,
+        acidity: item.acidity ?? undefined,
+        intensity: item.intensity ?? undefined,
+        bitterness: item.bitterness ?? undefined,
+        grindOptions: item.grind_options ?? undefined,
+        tastingProfileImage: item.tasting_profile_image ? fixPath(item.tasting_profile_image) : undefined,
+        artInfo: artInfo,
+    };
+};
 
 const mapProductToDatabase = (product: Partial<Product>): ProductUpdate => {
     const dbProduct: ProductUpdate = {};

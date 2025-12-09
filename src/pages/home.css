@@ -1,0 +1,234 @@
+/* Home Page Styles */
+
+/* Hero Section Adjustments */
+/* Hero Section Adjustments */
+.hero {
+    padding: 80px 0;
+    background-color: var(--primary-blue);
+    color: white;
+    overflow: hidden;
+}
+
+.hero-subtitle {
+    display: inline-block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #333;
+    /* Light Indigo/Blue for contrast on dark blue */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #333;
+    /* Solid white for maximum contrast */
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: #333;
+    /* Very light slate/gray */
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+.hero-buttons {
+    display: flex;
+    color: #333;
+    gap: 15px;
+}
+
+.hero-image-anim {
+    width: 500px;
+    height: auto;
+    object-fit: contain;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Brand Story Section */
+.brand-story {
+    padding: 80px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.story-item {
+    padding: 20px;
+}
+
+.story-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--primary-blue);
+    margin-bottom: 20px;
+}
+
+.story-item h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.story-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Origin Section */
+.origin-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.origin-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.origin-subtitle {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.origin-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--text-heading);
+    margin-bottom: 40px;
+}
+
+.origin-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4b5563;
+    margin-bottom: 20px;
+}
+
+.origin-text strong {
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* Feature Product Refinements */
+.feature-artist-credit {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.feature-desc {
+    color: #94a3b8;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Gallery Teaser */
+.gallery-teaser {
+    padding: 100px 0;
+    background-color: #0f172a;
+    /* Dark blue/slate */
+    color: white;
+    text-align: center;
+    background-image: url('/Minas-Gerais-Ilustracion.png');
+    /* Use one of the arts as subtle bg */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.gallery-teaser::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    /* Heavy overlay */
+}
+
+.teaser-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.teaser-content h2 {
+    font-family: var(--font-heading);
+    color: #cbd5e1;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.teaser-content p {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    margin-bottom: 30px;
+}
+
+.btn-large {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+}
+
+/* Product Grid Refinements */
+.product-artist-mini {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-image-anim {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 40px;
+    }
+}

@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './pages/Home'
+import Footer from './components/Footer'
 import Shop from './pages/Shop'
 import ProductDetail from './pages/ProductDetail'
 import CartSidebar from './components/CartSidebar'
@@ -14,6 +15,7 @@ import EditProduct from './pages/admin/EditProduct'
 import ProtectedRoute from './components/ProtectedRoute'
 import { MagicProvider, useMagic } from './context/MagicContext'
 import CosmicApp from './components/magic/CosmicApp'
+import ArtGallery from './pages/ArtGallery'
 
 function AppContent() {
   const { isMagicMode } = useMagic();
@@ -38,6 +40,7 @@ function AppContent() {
           <Route path="/tienda" element={<Shop />} />
           <Route path="/producto/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/galeria" element={<ArtGallery />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={
@@ -57,6 +60,8 @@ function AppContent() {
           } />
         </Routes>
       </main>
+
+      <Footer />
     </div>
   );
 }
